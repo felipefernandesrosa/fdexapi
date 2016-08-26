@@ -73,8 +73,9 @@ var express  = require('express'),
   })
 
   .post('/api/realty', function (req, res) {
-    var todo = new Realty( req.body );
-    res.json(req.body);
+    var realty = new Realty( req.body );
+    console.log(req.body);
+    res.json('test' + realty);
     //todo.id = todo._id;
     // http://mongoosejs.com/docs/api.html#model_Model-save
     //todo.save(function (err) {
