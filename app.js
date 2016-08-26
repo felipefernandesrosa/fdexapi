@@ -4,15 +4,20 @@ var express  = require('express'),
 
   //// Mongoose Schema definition
   Schema = new mongoose.Schema({
-    id       : String, 
-    name    : String,
-    type    : String
+    id              : String, 
+    name            : String,
+    description     : String,
+    type            : String,
+    value           : String,
+    place           : [{address : String}],
+    image           :  [{desc: String, url: String}],
+    contact         : String
   }),
-
+  
+  //setting model
   Realty = mongoose.model('Realty', Schema);
-
-  // Here we find an appropriate database to connect to, defaulting to
-  // localhost if we don't find one.
+  
+  //setting database uristring
   var uristring = 
     process.env.MONGODB_URI || 
   'mongodb://boilingmountain:boilingmountain123@ds017246.mlab.com:17246/boilingmountain';
@@ -20,7 +25,7 @@ var express  = require('express'),
   // Makes connection asynchronously.  Mongoose will queue up database
   // operations and release them when the connection is complete.
   mongoose.connect(uristring, function (err, res) {
-    if (err) { 
+    if (err) {
       console.log ('ERROR connecting to: ' + uristring + '. ' + err);
     } else {
       console.log ('Succeeded connected to: ' + uristring);
@@ -61,24 +66,29 @@ var express  = require('express'),
       }
   })
   
+  /**
+   * Api starts
+   **/
+  
   .get('/api', function (req, res) {
     res.json(200, {msg: 'OK' });
   })
 
-  .get('/api/realties', function (req, res) {
-    // http://mongoosejs.com/docs/api.html#query_Query-find
-    Realty.find( function ( err, todos ){
-      res.json(200, todos);
+  //return all realties
+  .get('/api/realty', function (req, res) {
+    
+    Realty.find( function ( err, realty ){
+      res.json(200, realty);
     });
   })
-
+  
+  // post and realty
   .post('/api/realty', function (req, res) {
     var realty = new Realty( req.body );
     
     realty.id = realty._id;
-    // http://mongoosejs.com/docs/api.html#model_Model-save
-    realty.save(function (err) {
-      console.log(err);
+    
+    realty.save(function (err,realty) {
       res.json(200, realty);
     });
   })
