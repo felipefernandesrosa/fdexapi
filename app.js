@@ -65,7 +65,7 @@ var express  = require('express'),
     res.json(200, {msg: 'OK' });
   })
 
-  .get('/api/reatlies', function (req, res) {
+  .get('/api/realties', function (req, res) {
     // http://mongoosejs.com/docs/api.html#query_Query-find
     Realty.find( function ( err, todos ){
       res.json(200, todos);
