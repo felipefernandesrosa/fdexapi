@@ -2,12 +2,12 @@ var express  = require('express'),
     mongoose = require('mongoose'),
     bodyParser = require('body-parser'),
 
-    //// Mongoose Schema definition
-    Schema = new mongoose.Schema({
-      id       : String, 
-      title    : String,
-      completed: Boolean
-    }),
+  //// Mongoose Schema definition
+  Schema = new mongoose.Schema({
+    id       : String, 
+    title    : String,
+    completed: Boolean
+  }),
 
   Realty = mongoose.model('Realty', Schema);
 
@@ -63,6 +63,23 @@ var express  = require('express'),
   
   .get('/api', function (req, res) {
     res.json(200, {msg: 'OK' });
+  })
+
+  .get('/api/reatlies', function (req, res) {
+    // http://mongoosejs.com/docs/api.html#query_Query-find
+    Realty.find( function ( err, todos ){
+      res.json(200, todos);
+    });
+  })
+
+  .post('/api/realty', function (req, res) {
+    var todo = new Realty( req.body );
+    res.json(req.body);
+    //todo.id = todo._id;
+    // http://mongoosejs.com/docs/api.html#model_Model-save
+    //todo.save(function (err) {
+    //  res.json(200, todo);
+    //});
   })
 
   .use(express.static(__dirname + '/'))
