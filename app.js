@@ -5,8 +5,8 @@ var express  = require('express'),
   //// Mongoose Schema definition
   Schema = new mongoose.Schema({
     id       : String, 
-    title    : String,
-    completed: Boolean
+    name    : String,
+    type    : String
   }),
 
   Realty = mongoose.model('Realty', Schema);
@@ -74,13 +74,13 @@ var express  = require('express'),
 
   .post('/api/realty', function (req, res) {
     var realty = new Realty( req.body );
-    console.log(req.body);
-    res.json('test' + realty);
-    //todo.id = todo._id;
+    
+    realty.id = realty._id;
     // http://mongoosejs.com/docs/api.html#model_Model-save
-    //todo.save(function (err) {
-    //  res.json(200, todo);
-    //});
+    realty.save(function (err) {
+      
+      res.json(200, realty);
+    });
   })
 
   .use(express.static(__dirname + '/'))
