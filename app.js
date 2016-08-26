@@ -78,7 +78,7 @@ var express  = require('express'),
     realty.id = realty._id;
     // http://mongoosejs.com/docs/api.html#model_Model-save
     realty.save(function (err) {
-      
+      console.log(err);
       res.json(200, realty);
     });
   })
