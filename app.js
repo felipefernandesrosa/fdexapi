@@ -3,13 +3,13 @@ var express  = require('express'),
     bodyParser = require('body-parser'),
 
     //// Mongoose Schema definition
-    //Schema = new mongoose.Schema({
-    //  id       : String, 
-    //  title    : String,
-    //  completed: Boolean
-    //}),
+    Schema = new mongoose.Schema({
+      id       : String, 
+      title    : String,
+      completed: Boolean
+    }),
 
-  Realty = mongoose.model('Realty');
+  Realty = mongoose.model('Realty', Schema);
 
   // Here we find an appropriate database to connect to, defaulting to
   // localhost if we don't find one.
