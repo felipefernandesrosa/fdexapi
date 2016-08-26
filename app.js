@@ -9,7 +9,7 @@ var express  = require('express'),
     //  completed: Boolean
     //}),
 
-  Realty = mongoose.model('Realty', Schema);
+  Realty = mongoose.model('Realty');
 
   // Here we find an appropriate database to connect to, defaulting to
   // localhost if we don't find one.
