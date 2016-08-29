@@ -10,7 +10,7 @@ var express  = require('express'),
     type            : String,
     value           : String,
     place           : [{address : String}],
-    image           :  [{ any: Schema.Types.Mixed }],
+    image           :  [{desc: String, url: String}],
     contact         : String
   }),
   
