@@ -82,6 +82,13 @@ var express  = require('express'),
     });
   })
   
+  .get('/api/realty/:id', function (req, res) {
+    // http://mongoosejs.com/docs/api.html#model_Model.findById
+    Realty.findById( req.params.id, function ( err, realty ) {
+      res.json(200, realty);
+    });
+  })
+  
   // post and realty
   .post('/api/realty', function (req, res) {
     var realty = new Realty( req.body );
